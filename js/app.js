@@ -21,12 +21,11 @@ if(edad >= 18){
 Esta funcion la encontré googleando metodos de validacion de la edad del usuario. Me gustaria saber como hacer para poder detener la ejecucion de la pagina o redireccionar en caso que el usuario sea menor pero bueno, por ahora es basico jaja
 */
 
-const cervezas = []
-const vinos = []
-const carrito = []
+
+let carrito = []
 // spoiler a los arrays que no vimos todavía pero quedan en blanco para no mandar cualquier cosa y que esté todo mal jaja
 
-class Cerveza {
+class Productos {
   constructor(id, marca, tipo, descripcion, precio, stock) {
       this.id = id
       this.marca = marca
@@ -50,14 +49,16 @@ class Cerveza {
 }
 
 
+const cerveza1 = new Productos('1', 'Temple', 'Honey', 'Cerveza Temple Honey Lata 473ml', 275, 48)
+const cerveza2 = new Productos('7', 'Patagonia', 'IPA', 'Cerveza Patagonia 24.7. Session IPA con Sauco Lata 410ml', 275, 48,)
+const cerveza3 = new Productos('3', 'Peñon', 'Lager', 'Cerveza Peñon del Aguila Doppelbock  Lata 473ml', 300, 24, )
+const cerveza4 = new Productos('4', 'Berliner', 'Pils', 'Cerveza Berliner Pilsner, alemana, Botella 473ml', 350, 48,)
 
-const cerveza1 = new Cerveza('1', 'Temple', 'Honey', 'Cerveza Temple Honey Lata 473ml', 300, 48)
-const cerveza2 = new Cerveza('2', 'Temple', 'IPA', 'Cerveza Temple Wolf IPA Lata 473ml', 350, 36, )
-const cerveza3 = new Cerveza('3', 'Temple', 'Ale', 'Cerveza Temple Scottish Ale Lata 473ml', 300, 24, )
-const cerveza4 = new Cerveza('4', 'Temple', 'Lager', 'Cerveza Temple Cosmica Lager Lata 473ml', 350, 48,)
-const cerveza5 = new Cerveza('5', 'Patagonia', 'Ale', 'Cerveza Patagonia Bohemian Pilsener Lata 410ml', 300, 48,)
-const cerveza6 = new Cerveza('6', 'Patagonia', 'Lager', 'Cerveza Patagonia Amber Lager Lata 410ml', 275, 48,)
-const cerveza7 = new Cerveza('7', 'Patagonia', 'IPA', 'Cerveza Patagonia 24.7. Session IPA con Sauco Lata 410ml', 300, 48,)
+
+
+const cervezas = [cerveza1, cerveza2, cerveza3, cerveza4]
+
+
 console.log(cerveza4)
 cerveza1.calcularPrecioIva()
 
@@ -66,3 +67,60 @@ cerveza1.calcularPrecioIva()
 
 
 
+const editarProductoSeleccionado = (productoSeleccionado) => {
+  const productoElegido = {
+      id: productoSeleccionado.id,
+      marca: productoSeleccionado.marca,
+      modelo: productoSeleccionado.descripcion,
+      tipo: productoSeleccionado.tipo,
+      cantidad: 1,
+      precio: productoSeleccionado.precio,
+  }
+
+  productoElegido.cantidad = Number(prompt('Cuantas unidades quiere sumar al carrito?'))
+
+  return productoElegido
+}
+
+
+const seleccionarProducto = () => {
+  const seleccionUsuario = prompt('Elegi la cerveza que quieras comprar. Tenemos las marcas Temple, Patagonia, Peñon y Berliner').toLowerCase()
+
+  switch (seleccionUsuario) {
+      case 'temple':
+          console.log('Elegiste Temple')
+          carrito.push(editarProductoSeleccionado(cerveza1))
+          break
+      case 'patagonia':
+          console.log('Elegiste Patagonia')
+          carrito.push(editarProductoSeleccionado(cerveza2))
+          break
+      case 'peñon':
+          console.log('Elegiste Peñon')
+          carrito.push(editarProductoSeleccionado(cerveza3))
+          break
+      case 'estrella':
+            console.log('Elegiste Berliner')
+            carrito.push(editarProductoSeleccionado(cerveza4))
+            break    
+      default:
+          console.log('Por favor, elegi una marca correcta')
+          break
+  }
+
+  if (confirm('Desea agregar otro producto a su compra?')) {
+      seleccionarProducto()
+  }
+}
+
+const sumarTotalCarrito = () => {
+  let sumaTotalCarrito = 0
+  for (const producto of carrito) {
+      sumaTotalCarrito += producto.precio * producto.cantidad
+  }
+  return sumaTotalCarrito
+}
+
+seleccionarProducto()
+
+alert('Gracias por su compra, su total es de $' + sumarTotalCarrito())
