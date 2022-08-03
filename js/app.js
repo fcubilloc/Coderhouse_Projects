@@ -23,14 +23,14 @@ Esta funcion la encontré googleando metodos de validacion de la edad del usuari
 
 
 let carrito = []
-// spoiler a los arrays que no vimos todavía pero quedan en blanco para no mandar cualquier cosa y que esté todo mal jaja
+
 
 class Productos {
-  constructor(id, marca, tipo, descripcion, precio, stock) {
+  constructor(id, modelo, talles, colores, precio, stock) {
       this.id = id
-      this.marca = marca
-      this.tipo = tipo
-      this.descripcion = descripcion
+      this.modelo = modelo
+      this.talles = talles
+      this.colores = colores
       this.precio = precio
       this.stock = stock
 
@@ -49,18 +49,19 @@ class Productos {
 }
 
 
-const cerveza1 = new Productos('1', 'Temple', 'Honey', 'Cerveza Temple Honey Lata 473ml', 275, 48)
-const cerveza2 = new Productos('7', 'Patagonia', 'IPA', 'Cerveza Patagonia 24.7. Session IPA con Sauco Lata 410ml', 275, 48,)
-const cerveza3 = new Productos('3', 'Peñon', 'Lager', 'Cerveza Peñon del Aguila Doppelbock  Lata 473ml', 300, 24, )
-const cerveza4 = new Productos('4', 'Berliner', 'Pils', 'Cerveza Berliner Pilsner, alemana, Botella 473ml', 350, 48,)
+const sneaker1 = new Productos('1', 'Air Force', [41, 42, 43], ['Negro, Azul'], 25000, 50)
+const sneaker2 = new Productos('2', 'Air Jordan', [41, 42], ['Gris, Verde'], 24000, 49,)
+const sneaker3 = new Productos('3', 'Blazer', [41, 42, 43, 44], ['Gris, Verde'], 21000, 24, )
+const sneaker4 = new Productos('4', 'Crater', [39, 40, 41, 42, 43], ['Negro, Gris'], 24000, 36,)
+const sneaker5 = new Productos('4', 'Hippie', [38, 39, 40, 41, 42], ['Gris, Negro'], 20000, 48,)
 
 
 
-const cervezas = [cerveza1, cerveza2, cerveza3, cerveza4]
+const sneakers = [sneaker1, sneaker2, sneaker3, sneaker4, sneaker5]
 
 
-console.log(cerveza4)
-cerveza1.calcularPrecioIva()
+console.log(sneaker4)
+sneaker1.calcularPrecioIva()
 
 
 
@@ -70,39 +71,45 @@ cerveza1.calcularPrecioIva()
 const editarProductoSeleccionado = (productoSeleccionado) => {
   const productoElegido = {
       id: productoSeleccionado.id,
-      marca: productoSeleccionado.marca,
-      modelo: productoSeleccionado.descripcion,
-      tipo: productoSeleccionado.tipo,
+      modelo: productoSeleccionado.modelo,
+      talle: 0,
+      color: '',
       cantidad: 1,
       precio: productoSeleccionado.precio,
   }
 
-  productoElegido.cantidad = Number(prompt('Cuantas unidades quiere sumar al carrito?'))
+  productoElegido.talle = Number(prompt('Elija Talle, tenemos los siguientes en stock: ' + productoSeleccionado.talles.join('-')))
+    productoElegido.color = prompt('Elija Color, tenemos los siguientes en stock: ' + productoSeleccionado.colores.join(', ')).toLowerCase()
+    productoElegido.cantidad = Number(prompt('Cuantas unidades quiere sumar al carrito?'))
 
   return productoElegido
 }
 
 
 const seleccionarProducto = () => {
-  const seleccionUsuario = prompt('Elegi la cerveza que quieras comprar. Tenemos las marcas Temple, Patagonia, Peñon y Berliner').toLowerCase()
+  const seleccionUsuario = prompt('Elegi el modelo que quieras comprar. Tenemos los siguientes en stock: Air Force - Jordan - Blazer - Crater - Hippie').toLowerCase()
 
   switch (seleccionUsuario) {
-      case 'temple':
-          console.log('Elegiste Temple')
-          carrito.push(editarProductoSeleccionado(cerveza1))
+      case 'air force':
+          console.log('Elegiste Air Force')
+          carrito.push(editarProductoSeleccionado(sneaker1))
           break
-      case 'patagonia':
-          console.log('Elegiste Patagonia')
-          carrito.push(editarProductoSeleccionado(cerveza2))
+      case 'jordan':
+          console.log('Elegiste Air Jordan')
+          carrito.push(editarProductoSeleccionado(sneaker2))
           break
-      case 'peñon':
-          console.log('Elegiste Peñon')
-          carrito.push(editarProductoSeleccionado(cerveza3))
+      case 'blazer':
+          console.log('Elegiste Blazer')
+          carrito.push(editarProductoSeleccionado(sneaker3))
           break
-      case 'estrella':
-            console.log('Elegiste Berliner')
-            carrito.push(editarProductoSeleccionado(cerveza4))
+      case 'crater':
+            console.log('Elegiste Crater')
+            carrito.push(editarProductoSeleccionado(sneaker4))
             break    
+      case 'hippie':
+              console.log('Elegiste Hippie')
+              carrito.push(editarProductoSeleccionado(sneaker5))
+              break          
       default:
           console.log('Por favor, elegi una marca correcta')
           break
