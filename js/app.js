@@ -1,4 +1,5 @@
 
+/*
 function calcularEdad(fechaNacimiento) {
   let hoy = new Date();
   let cumple = new Date(fechaNacimiento);
@@ -17,20 +18,48 @@ if(edad >= 18){
 }else{
   alert("Lo sentimos " + nombreUsuario + ", este sitio es solo para mayores de edad");
 }
-/*
-Esta funcion la encontré googleando metodos de validacion de la edad del usuario. Me gustaria saber como hacer para poder detener la ejecucion de la pagina o redireccionar en caso que el usuario sea menor pero bueno, por ahora es basico jaja
 */
+
+
+
+
+const wrapper = document.querySelector(".sliderWrapper");
+const menuItems = document.querySelectorAll(".menuItem");
+
+
+
+
+
+//cambiar de slides para ver los otros
+menuItems.forEach((item, index) => {
+  item.addEventListener("click", () => {
+    wrapper.style.transform = `translateX(${-100 * index}vw)`;
+
+    //cambiar el producto elegido
+    choosenProduct = products[index];
+
+    //cambiar el texto al del producto elegido
+    currentProductTitle.textContent = choosenProduct.title;
+    currentProductPrice.textContent = "$" + choosenProduct.price;
+    currentProductImg.src = choosenProduct.colors[0].img;
+
+    //colores
+    currentProductColors.forEach((color, index) => {
+      color.style.backgroundColor = choosenProduct.colors[index].code;
+    });
+  });
+});
 
 
 let carrito = []
 
 
 class Productos {
-  constructor(id, modelo, talles, colores, precio, stock) {
+  constructor(id, modelo, talles, colors, precio, stock) {
       this.id = id
       this.modelo = modelo
       this.talles = talles
-      this.colores = colores
+      this.colors = colors
       this.precio = precio
       this.stock = stock
 
@@ -49,11 +78,11 @@ class Productos {
 }
 
 
-const sneaker1 = new Productos('1', 'Air Force', [41, 42, 43], ['Negro, Azul'], 25000, 50)
-const sneaker2 = new Productos('2', 'Air Jordan', [41, 42], ['Gris, Verde'], 24000, 49,)
-const sneaker3 = new Productos('3', 'Blazer', [41, 42, 43, 44], ['Gris, Verde'], 21000, 24, )
-const sneaker4 = new Productos('4', 'Crater', [39, 40, 41, 42, 43], ['Negro, Gris'], 24000, 36,)
-const sneaker5 = new Productos('4', 'Hippie', [38, 39, 40, 41, 42], ['Gris, Negro'], 20000, 48,)
+const sneaker1 = new Productos('1', 'Air Force', [41, 42, 43], [{code: "negro", img: "./img/air.png"},{code: "azul",img: "./img/air2.png"}], 25000, 50)
+const sneaker2 = new Productos('2', 'Air Jordan', [41, 42], [ { code: "lightgray", img: "./img/jordan.png", }, { code: "green", img: "./img/jordan2.png", }, ], 24000, 49,)
+const sneaker3 = new Productos('3', 'Blazer', [41, 42, 43, 44], [ { code: "lightgray", img: "./img/blazer.png", }, { code: "green", img: "./img/blazer2.png", }, ], 21000, 24, )
+const sneaker4 = new Productos('4', 'Crater', [39, 40, 41, 42, 43], [ { code: "black", img: "./img/crater.png", }, { code: "lightgray", img: "./img/crater2.png", }, ], 24000, 36,)
+const sneaker5 = new Productos('4', 'Hippie', [38, 39, 40, 41, 42], [{ code: "gray", img: "./img/hippie.png", }, { code: "black", img: "./img/hippie2.png",}], 20000, 48,)
 
 
 
