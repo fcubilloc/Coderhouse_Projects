@@ -50,7 +50,7 @@ menuItems.forEach((item, index) => {
   });
 });
 
-
+/*
 let carrito = []
 
 
@@ -160,3 +160,5 @@ const sumarTotalCarrito = () => {
 seleccionarProducto()
 
 alert('Gracias por su compra, su total es de $' + sumarTotalCarrito())
+
+*/
