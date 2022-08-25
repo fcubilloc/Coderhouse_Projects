@@ -455,6 +455,7 @@ nav {
   color: white;
   font-weight: 600;
   cursor: pointer;
+  margin-left: 1em;
 }
 
 .productButton:hover {

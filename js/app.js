@@ -11,7 +11,6 @@ modalCloseOverlay.addEventListener('click', modalCloseFunc);
 modalCloseBtn.addEventListener('click', modalCloseFunc);
 
 
-
 class Products {
   constructor(id, title, sizes, colors, price, stock) {
       this.id = id
@@ -106,10 +105,59 @@ currentProductSizes.forEach((size) => {
 const productButton = document.querySelector(".productButton");
 const payment = document.querySelector(".payment");
 const close = document.querySelector(".close");
+const checkoutBtn = document.querySelector("#checkoutBtn")
 
 productButton.addEventListener("click", () => {
   payment.style.display = "flex";
 });
+
+// Traté de hacer que tire mensajes diferentes dependiendo 
+// de los valores del formulario pero no pude hacerlo funcionar. 
+// Dejo el codigo comentado para seguirlo más adelante 
+
+// const nombre = document.getElementById("name")
+// const phoneNumber = document.getElementById("phoneNumber")
+// const address = document.getElementById("address")
+// const cardInfo = document.getElementById("cardInfo")
+// const mmCard = document.getElementById("mmCard").val()
+// const yyyyCard = document.getElementById("yyyyCard").val()
+// const cvvCard = document.getElementById("cvvCard").val()
+
+
+// checkoutBtn.addEventListener("click", () => {
+//      if (nombre == '' || phoneNumber == '' || address == '' || cardInfo == '' || mmCard == '' || yyyyCard == '' || cvvCard == '' ){
+//       Swal.fire({
+//         icon: 'warning',
+//         title: 'Something went wrong!',
+//         text: 'Please check the missing fields.',
+//         footer: '<a href="">Why do I have this issue?</a>'
+//       })
+//     }else if (nombre == "John Doe" || phoneNumber == "+1 234 5678" || address == "Elton St 21 22-145" || cardInfo == "Card Number" || mmCard == "mm" || yyyyCard == "yyyy"|| cvvCard == "cvv"){
+//       Swal.fire({
+//         icon: 'warning',
+//         title: 'Something went wrong!',
+//         text: 'Please check the missing fields and fill the form correctly.',
+//         footer: '<a href="">Why do I have this issue?</a>'
+//       })
+//     }else{
+//       Swal.fire(
+//         'Thank you!',
+//         'Your purchase has been completed!',
+//         'success'
+//       )
+//     }   
+
+
+// });
+
+checkoutBtn.addEventListener("click", () => {
+  Swal.fire(
+    'Thank you!',
+    'Your purchase has been completed!',
+    'success'
+  )});
+
+
 
 close.addEventListener("click", () => {
   payment.style.display = "none";

@@ -152,21 +152,22 @@
       <div class="payment">
         <h1 class="payTitle">Personal Information</h1>
         <label>Name and Surname</label>
-        <input type="text" placeholder="John Doe" class="payInput">
+        <input id="name" type="text" placeholder="John Doe" class="payInput">
         <label>Phone Number</label>
-        <input type="text" placeholder="+1 234 5678" class="payInput">
+        <input type="text" placeholder="+1 234 5678" class="payInput" id="phoneNumber">
         <label>Address</label>
-        <input type="text" placeholder="Elton St 21 22-145" class="payInput">
+        <input  id="address" type="text" placeholder="Elton St 21 22-145" class="payInput">
         <h1 class="payTitle">Card Information</h1>
         <div class="cardIcons">
             <img src="./img/visa.png" width="40" alt="" class="cardIcon">
             <img src="./img/master.png" alt="" width="40" class="cardIcon">
         </div>
-        <input type="password" class="payInput" placeholder="Card Number">
+        <input type="password" class="payInput" placeholder="Card Number" id="cardNumber">
         <div class="cardInfo">
-            <input type="text" placeholder="mm" class="payInput sm">
-            <input type="text" placeholder="yyyy" class="payInput sm">
-            <input type="text" placeholder="cvv" class="payInput sm">
+            <input type="text" placeholder="mm" class="payInput sm" id="mmCard">
+            <input type="text" placeholder="yyyy" class="payInput sm" id="yyyyCard">
+            <input type="text" placeholder="cvv" class="payInput sm" id="cvvCard">
+            <button class="productButton" id="checkoutBtn">Buy</button>
         </div>
         <button class="payButton">Checkout!</button>
         <span class="close">X</span>
@@ -176,5 +177,6 @@
     
       <script src="js/app.js"></script>
       <script src="js/data.js"></script>
+      <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>
 </html>
