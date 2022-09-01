@@ -11,49 +11,20 @@ modalCloseOverlay.addEventListener('click', modalCloseFunc);
 modalCloseBtn.addEventListener('click', modalCloseFunc);
 
 
-class Products {
-  constructor(id, title, sizes, colors, price, stock) {
-      this.id = id
-      this.title = title
-      this.sizes = sizes
-      this.colors = colors
-      this.price = price
-      this.stock = stock
+const getProducts = async () => {
+  const response = await fetch('./js/products.json')
+  const products = await response.json()
+  return products}
 
-      
-  }
-
-  vender(cantidad) {
-    this.stock = this.stock - cantidad
-}
-
-  calcularPrecioIva() {
-  let precioIva = this.price * 1.21;
-  console.log(precioIva);
-  return precioIva;
-}
-}
-
-
-const sneaker1 = new Products('1', 'Air Force', [41, 42, 43], [{code: "black", img: "./img/air.png"},{code: "blue",img: "./img/air2.png"}], 25000, 50)
-const sneaker2 = new Products('2', 'Air Jordan', [41, 42], [ { code: "lightgray", img: "./img/jordan.png", }, { code: "green", img: "./img/jordan2.png", }, ], 24000, 49,)
-const sneaker3 = new Products('3', 'Blazer', [41, 42, 43, 44], [ { code: "lightgray", img: "./img/blazer.png", }, { code: "green", img: "./img/blazer2.png", }, ], 21000, 24, )
-const sneaker4 = new Products('4', 'Crater', [39, 40, 41, 42, 43], [ { code: "black", img: "./img/crater.png", }, { code: "lightgray", img: "./img/crater2.png", }, ], 24000, 36,)
-const sneaker5 = new Products('4', 'Hippie', [38, 39, 40, 41, 42], [{ code: "gray", img: "./img/hippie.png", }, { code: "black", img: "./img/hippie2.png",}], 20000, 48,)
-
-
-
-const sneakers = [sneaker1, sneaker2, sneaker3, sneaker4, sneaker5]
-
-
-console.log(sneaker4)
-sneaker1.calcularPrecioIva()
-
+  getProducts()
+  const products = getProducts()
+  console.log(products);
+  
 
 const wrapper = document.querySelector(".sliderWrapper");
 const menuItems = document.querySelectorAll(".menuItem");
 
-let chosenProduct = sneakers[0];
+let chosenProduct = products[0];
 
 
 const currentProductImg = document.querySelector(".productImg");
