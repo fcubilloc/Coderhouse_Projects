@@ -389,6 +389,37 @@ nav {
   background-color: rgb(124, 115, 80);
 }
 
+.features {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50px;
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.featureIcon {
+  width: 50px;
+  height: 50px;
+}
+
+.featureTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 20px;
+}
+
+.featureDesc {
+  color: gray;
+  width: 50%;
+  height: 100px;
+}
+
 
 
 
@@ -533,6 +564,37 @@ label {
   cursor: pointer;
 }
 
+.addButton {
+float: right;
+padding: 10px 20px;
+background-color: black;
+color: white;
+font-weight: 600;
+cursor: pointer;
+margin-left: 1em;
+}
+
+.addButton:hover {
+  background-color: white;
+  color: black;
+}
+
+.removerButton {
+  float: right;
+  padding: 10px 20px;
+  background-color: black;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 1em;
+  }
+  
+  .removerButton:hover {
+    background-color: white;
+    color: black;
+  }
+
+
 .close {
   width: 20px;
   height: 20px;
@@ -547,3 +609,4 @@ label {
   cursor: pointer;
   padding: 2px;
 }
+

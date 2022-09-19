@@ -11,20 +11,25 @@ modalCloseOverlay.addEventListener('click', modalCloseFunc);
 modalCloseBtn.addEventListener('click', modalCloseFunc);
 
 
-const getProducts = async () => {
-  const response = await fetch('./js/products.json')
-  const products = await response.json()
-  return products}
+document.addEventListener('DOMContentLoaded', e => { getProducts() })
 
-  getProducts()
-  const products = getProducts()
-  console.log(products);
-  
+
+const carrito = [];
+const allProducts = []
+
+const getProducts = async () => {
+  const response = await fetch('../json/products.json');
+  const allProducts = await response.json()
+  console.log(allProducts)
+}
+
+
+
 
 const wrapper = document.querySelector(".sliderWrapper");
 const menuItems = document.querySelectorAll(".menuItem");
 
-let chosenProduct = products[0];
+let chosenProduct = allProducts[0];
 
 
 const currentProductImg = document.querySelector(".productImg");
@@ -32,13 +37,14 @@ const currentProductTitle = document.querySelector(".productTitle");
 const currentProductPrice = document.querySelector(".productPrice");
 const currentProductColors = document.querySelectorAll(".color");
 const currentProductSizes = document.querySelectorAll(".size");
+const currentProductId = document.querySelectorAll(".id")
 
 
 //cambiar de slides para ver los otros
 menuItems.forEach((item, index) => {
   item.addEventListener("click", () => {
     wrapper.style.transform = `translateX(${-100 * index}vw)`;
-
+    
     //cambiar el producto elegido
     chosenProduct = sneakers[index];
 
@@ -46,7 +52,7 @@ menuItems.forEach((item, index) => {
     currentProductTitle.textContent = chosenProduct.title;
     currentProductPrice.textContent = "$" + chosenProduct.price;
     currentProductImg.src = chosenProduct.colors[0].img;
-   
+
     //colores
     currentProductColors.forEach((color, index) => {
       color.style.backgroundColor = chosenProduct.colors[index].code;
@@ -73,65 +79,128 @@ currentProductSizes.forEach((size) => {
 });
 
 
-const productButton = document.querySelector(".productButton");
+
+const precioTotalCarrito = () => {
+      let precioTotal = 0
+      precioTotal = carrito.length * 25000
+      return precioTotal;
+    }
+
+
+precioTotal = precioTotalCarrito()
+
+
+const agregarProducto = (e) => {
+  const productoActual = chosenProduct.id
+  carrito.push(productoActual)
+  precioTotalCarrito()
+  Swal.fire(
+    'Producto Agregado!',
+    `Su producto ha sido removido del carrito! Tiene ${carrito.length} productos en su carrito. El total de su compra actual es $${precioTotalCarrito(precioTotal)}`,
+    'success'
+  )
+  console.log(carrito);
+}
+
+const removerProducto = (e) => {
+  const productoActual = chosenProduct.id
+  if (chosenProduct.id == productoActual) {
+    carrito.pop(productoActual)
+    precioTotalCarrito()
+    Swal.fire(
+      'Producto Removido!',
+      `Su producto ha sido removido del carrito! Su carrito tiene ${carrito.length} productos. El total de su compra actual es $${precioTotalCarrito(precioTotal)}`,
+      'success'
+    )
+    console.log(carrito);
+    
+}
+}
+
+const productButton = document.querySelector(".productButton")
+const addButton = document.querySelector(".addButton");;
 const payment = document.querySelector(".payment");
 const close = document.querySelector(".close");
 const checkoutBtn = document.querySelector("#checkoutBtn")
+const removerButton = document.querySelector(".removerButton")
+
+addButton.addEventListener("click", agregarProducto);
+
 
 productButton.addEventListener("click", () => {
   payment.style.display = "flex";
 });
 
-// Traté de hacer que tire mensajes diferentes dependiendo 
-// de los valores del formulario pero no pude hacerlo funcionar. 
-// Dejo el codigo comentado para seguirlo más adelante 
+removerButton.addEventListener("click", removerProducto);
 
-// const nombre = document.getElementById("name")
-// const phoneNumber = document.getElementById("phoneNumber")
-// const address = document.getElementById("address")
-// const cardInfo = document.getElementById("cardInfo")
-// const mmCard = document.getElementById("mmCard").val()
-// const yyyyCard = document.getElementById("yyyyCard").val()
-// const cvvCard = document.getElementById("cvvCard").val()
-
-
-// checkoutBtn.addEventListener("click", () => {
-//      if (nombre == '' || phoneNumber == '' || address == '' || cardInfo == '' || mmCard == '' || yyyyCard == '' || cvvCard == '' ){
-//       Swal.fire({
-//         icon: 'warning',
-//         title: 'Something went wrong!',
-//         text: 'Please check the missing fields.',
-//         footer: '<a href="">Why do I have this issue?</a>'
-//       })
-//     }else if (nombre == "John Doe" || phoneNumber == "+1 234 5678" || address == "Elton St 21 22-145" || cardInfo == "Card Number" || mmCard == "mm" || yyyyCard == "yyyy"|| cvvCard == "cvv"){
-//       Swal.fire({
-//         icon: 'warning',
-//         title: 'Something went wrong!',
-//         text: 'Please check the missing fields and fill the form correctly.',
-//         footer: '<a href="">Why do I have this issue?</a>'
-//       })
-//     }else{
-//       Swal.fire(
-//         'Thank you!',
-//         'Your purchase has been completed!',
-//         'success'
-//       )
-//     }   
-
-
-// });
 
 checkoutBtn.addEventListener("click", () => {
   Swal.fire(
     'Thank you!',
     'Your purchase has been completed!',
     'success'
-  )});
+  )
+});
 
 
 
 close.addEventListener("click", () => {
   payment.style.display = "none";
 });
+
+
+
+const ProductListContainer = document.querySelector('#productListContainer')
+
+
+
+ 
+
+const renderizarListaProductos = () => {
+  ProductListContainer.innerHTML = ''
+  products.forEach((product) => {
+    const productCard = document.createElement('div')
+    productCard.classList.add('.features')
+    productCard.setAttribute('data-id', chosenProduct.id)
+    productCard.innerHTML = `
+          <div class="feature">
+         <h3>${product.name}</h3>
+         <img src="${product.colors.img}" alt="${product.img}"/>
+        <h3>${product.price}</h3>
+        <button class="button-add" onclick="add('product-1', 50)">Agregar</button>
+        </div>
+          `
+    ProductListContainer.append(ProcuctCard)
+  })
+  const productCards = document.querySelectorAll(".features")
+  console.log(productCards);
+}
+
+
+// const renderizarDatosProductos = (e) => {
+//   const productIdSeleccionado = e.target.closest('.menuTab').getAttribute('data-id')
+//   const productSeleccionado = allProducts.find((pokemon) => product.id == productIdSeleccionado)
+
+//   cardName.textContent = productSeleccionado.name
+//   cardId.textContent = `#${productSeleccionado.id}`
+//   cardType.textContent = productSeleccionado.type
+//   cardDesc.textContent = productSeleccionado.desc
+//   cardLink.setAttribute('href', productSeleccionado.url)
+//   cardTop.style.backgroundImage = `url(${productSeleccionado.img})`
+// }
+
+
+
+// const getAllProducts = async () => {
+//   try {
+//     const response = await fetch('../json/products.json')
+//     const data = await response.json()
+//     allProducts = data
+//     renderizarListaProductos(allProducts)
+//   } catch (error) {
+//     alert('Ups! Hubo un problema, intentarlo nuevamente mas tarde')
+//     console.log(error)
+//   }
+// }
 
 

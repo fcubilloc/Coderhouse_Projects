@@ -39,7 +39,7 @@
                 "img": "./img/jordan2.png"
             }
         ],
-        "price": 24000,
+        "price": 25000,
         "stock": 49
     },
     {
@@ -62,7 +62,7 @@
                 "img": "./img/blazer2.png"
             }
         ],
-        "price": 21000,
+        "price": 25000,
         "stock": 24
     },
     {
@@ -86,7 +86,7 @@
                 "img": "./img/crater2.png"
             }
         ],
-        "price": 24000,
+        "price": 25000,
         "stock": 36
     },
     {
@@ -110,7 +110,7 @@
                 "img": "./img/hippie2.png"
             }
         ],
-        "price": 20000,
+        "price": 25000,
         "stock": 48
     }
 ]
